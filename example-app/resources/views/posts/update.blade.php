@@ -8,7 +8,7 @@
       <form method="POST" action="{{route('posts.store')}}">
         @csrf
         <div class="mb-4 " style=" margin: '10px';
-                                        boxSizing: 'content-box';
+                                    
                                         width: '50px';
                                         border-radius: '30px';
                                         background-color: '#8D8DAA';
