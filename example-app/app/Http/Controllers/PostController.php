@@ -56,4 +56,8 @@ class PostController extends Controller
 
         ]);
     }
+    public function update()
+    {
+        return view('posts.update');
+    }
 }

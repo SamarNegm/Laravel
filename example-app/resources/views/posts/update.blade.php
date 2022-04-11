@@ -30,7 +30,7 @@
        </div>
 
           <div class="mb-3" style="margin:auto">
-                <button type="submit" class="btn" style="background-color:#8D8DAA; border-color:#8D8DAA;color: white;">Create Post</button>
+                <button type="submit" class="btn" style="background-color:#8D8DAA; border-color:#8D8DAA;color: white;">Update Post</button>
           </div>
         </form>
         </div>
