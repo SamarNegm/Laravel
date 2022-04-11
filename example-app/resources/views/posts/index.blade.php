@@ -26,7 +26,7 @@
                 <td>
                     <a href="{{route('posts.show', ['post' => $post['id']],['allposts' =>$allPosts])}}" class="btn btn-info">View</a>
                     <a href="{{route('posts.update', ['post' => $post['id']],['allposts' =>$allPosts])}}" class="btn btn-primary" >Edit</a>
-                    <a href="#" class="btn btn-danger">Delete</a>
+                    <a onclick="return confirm('Are you sure?')" href="{{route('posts.destroy', ['post' => $post['id']],['allposts' =>$allPosts])}}" class="btn btn-danger">Delete</a>
                 </td>
               </tr>
               @endforeach

@@ -60,4 +60,9 @@ class PostController extends Controller
     {
         return view('posts.update');
     }
+    public function destroy()
+    {
+        
+        return view('posts.destroy');
+    }
 }
