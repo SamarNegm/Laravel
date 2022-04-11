@@ -6,16 +6,26 @@ use Illuminate\Http\Request;
 
 class PostController extends Controller
 {
-    public function index()
+    protected $posts;
+    public function __construct() 
     {
         $posts = [
-            ['id' => 1, 'title' => 'first post', 'posted_by' => 'ahmed', 'created_at' => '2022-04-11'],
-            ['id' => 2, 'title' => 'second post', 'posted_by' => 'mohamed', 'created_at' => '2022-04-11'],
+            ['id' => 0, 'title' => 'first post', 'posted_by' => 'ahmed', 'created_at' => '2022-04-11','description'=>'First post description'],
+            ['id' => 1, 'title' => 'second post', 'posted_by' => 'mohamed', 'created_at' => '2022-04-11','description'=>'Second post description'],
         ];
+        // Fetch the Site Settings object
+        $this->posts= $posts;
+        // View::share('posts', $this->posts);
+    }
+
+    public function index()
+    {
+      
         // dd($posts); //stop execution and dump the variable
         return view('posts.index',[
-            'allPosts' => $posts,
+            'allPosts' => $this->posts,
         ]);
+    
     }
 
     public function create()
@@ -23,16 +33,27 @@ class PostController extends Controller
         return view('posts.create');
     }
 
-    public function store()
+    public function store(Request $request)
     {
-        //some logic to store data in db
-        //redirect to /posts
-        return 'we are in store';
+        $name = $request->input('name');
+        $description = $request->input('description');
+        $postCreator= $request->input('postCreator');
+        array_push( $this->posts,['id'=>count($this->posts),'title'=>$name,'description'=>$description,'posted_by'=>$postCreator, 'created_at' => '2022-04-11']);
+        return view('posts.index',[
+            'allPosts' => $this->posts,
+        ]);
+        //
     }
 
-    public function show($post)
+    public function show($id)
     {
-        // dd($post);
-        return view('posts.show');
+       
+        
+       
+        return     view('posts.show',[
+            'allPosts' =>  $this->posts,
+            'id' =>$id
+
+        ]);
     }
 }

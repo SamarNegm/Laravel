@@ -4,7 +4,7 @@
 
 @section('content')
         <div class="text-center">
-            <a href="{{ route('posts.create') }}" class="mt-4 btn btn-success">Create Post</a>
+            <a href="{{ route('posts.create') }}" class="btn" style="margin: 30px;background-color:#8D8DAA; border-color:#8D8DAA;color: white;">Create Post</a>
         </div>
         <table class="table mt-4">
             <thead>
@@ -24,7 +24,7 @@
                 <td>{{$post['posted_by']}}</td>
                 <td>{{$post['created_at']}}</td>
                 <td>
-                    <a href="{{route('posts.show', ['post' => $post['id']])}}" class="btn btn-info">View</a>
+                    <a href="{{route('posts.show', ['post' => $post['id']],['allposts' =>$allPosts])}}" class="btn btn-info">View</a>
                     <a href="#" class="btn btn-primary">Edit</a>
                     <a href="#" class="btn btn-danger">Delete</a>
                 </td>
