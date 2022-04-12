@@ -83,16 +83,12 @@ class PostController extends Controller
     {
         // dd($id);
         $data = request()->all();
-        Post::table('users')
-        ->where('id', $id)
-        ->update([
-            'title' => $data['name'],
-            'description' => $data['description'],
-            'user_id' => $data['postCreator'],
-            'some_column' => 'some value',
-            'x' => 'asd',
-            'y' => 'askdhjashd',
-        ]);
+        $post = Post::find($id);
+        $post->title= $data['name'];
+        $post->description= $data['description'];
+        $post->user_id= $data['postCreator'];
+        $post->save();
+     
  
      
         //redirect to /posts
@@ -101,8 +97,11 @@ class PostController extends Controller
     }
     public function destroy($id)
     {
-        dd($id);
-        
-        return view('posts.destroy');
+
+        $post = Post::find($id);
+ 
+        $post->delete();
+        return to_route('posts.index');
+
     }
 }
