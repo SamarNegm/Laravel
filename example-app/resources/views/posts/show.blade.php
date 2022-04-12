@@ -10,8 +10,8 @@
     Post Info
   </div>
   <div class="card-body">
-    <h5 class="card-title"><span style="font-weight:bold">Title : </span>{{$allPosts[$id]['title']}}</h5>
-    <p class="card-text"><span style="font-weight:bold">Description : </span>{{$allPosts[$id]['description']}} </p>
+    <h5 class="card-title"><span style="font-weight:bold">Title : </span>{{$dbPost->title}}</h5>
+    <p class="card-text"><span style="font-weight:bold">Description : </span>{{$dbPost->description}} </p>
 
   </div>
 </div>
@@ -21,8 +21,8 @@
     User Info
   </div>
   <div class="card-body">
-    <h5 class="card-title"><span style="font-weight:bold">Name : </span> {{$allPosts[$id]['posted_by']}}</h5>
-    <p class="card-text"><span style="font-weight:bold">Created At : </span> {{$allPosts[$id]['created_at']}} </p>
+    <h5 class="card-title"><span style="font-weight:bold">Name : </span>{{$dbUser->name}}</h5>
+    <p class="card-text"><span style="font-weight:bold">Email : </span> {{$dbUser->email}} </p>
    
   </div>
   

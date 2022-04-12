@@ -4,15 +4,14 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
+use App\Models\Post;
+use App\Models\User;
 class PostController extends Controller
 {
     protected $posts;
     public function __construct() 
     {
-        $posts = [
-            ['id' => 0, 'title' => 'first post', 'posted_by' => 'ahmed', 'created_at' => '2022-04-11','description'=>'First post description'],
-            ['id' => 1, 'title' => 'second post', 'posted_by' => 'mohamed', 'created_at' => '2022-04-11','description'=>'Second post description'],
-        ];
+        $posts = Post::all();
         // Fetch the Site Settings object
         $this->posts= $posts;
         // View::share('posts', $this->posts);
@@ -21,47 +20,88 @@ class PostController extends Controller
     public function index()
     {
       
-        // dd($posts); //stop execution and dump the variable
-        return view('posts.index',[
-            'allPosts' => $this->posts,
-        ]);
-    
+       //we need a model class that retrieves data from posts table
+       $posts = Post::all();
+       return view('posts.index',[
+           'allPosts' => $posts,
+       ]);
     }
 
     public function create()
     {
-        return view('posts.create');
+        $users = User::all();
+
+        //query to get all users
+        return view('posts.create',[
+            'users' => $users,
+        ]);
     }
 
     public function store(Request $request)
     {
-        $name = $request->input('name');
-        $description = $request->input('description');
-        $postCreator= $request->input('postCreator');
-        array_push( $this->posts,['id'=>count($this->posts),'title'=>$name,'description'=>$description,'posted_by'=>$postCreator, 'created_at' => '2022-04-11']);
-        return view('posts.index',[
-            'allPosts' => $this->posts,
+        $data = request()->all();
+        // $title = request()->title;
+
+        //store the request data in the db
+        Post::create([
+            'title' => $data['name'],
+            'description' => $data['description'],
+            'user_id' => $data['postCreator'],
+            'some_column' => 'some value',
+            'x' => 'asd',
+            'y' => 'askdhjashd',
         ]);
+
+        //redirect to /posts
+        return to_route('posts.index');
+
         //
     }
 
     public function show($id)
     {
        
-        
-       
-        return     view('posts.show',[
-            'allPosts' =>  $this->posts,
-            'id' =>$id
-
+             //select * from posts where id = 1
+             $dbPost = Post::where('id', $id)->first();
+             $dbUser = User::where('id', $dbPost->user_id)->first();
+             return view('posts.show',[
+                'dbPost' => $dbPost,
+                'dbUser' => $dbUser,
+            ]);
+    }
+    public function update($id)
+    {
+        $dbPost = Post::where('id', $id)->first();
+        // dd($dbPost);
+        $users = User::all();
+        return view('posts.update',[
+            'post' =>  $dbPost ,
+            'users' => $users
         ]);
     }
-    public function update()
+    public function updateTable($id)
     {
-        return view('posts.update');
+        // dd($id);
+        $data = request()->all();
+        Post::table('users')
+        ->where('id', $id)
+        ->update([
+            'title' => $data['name'],
+            'description' => $data['description'],
+            'user_id' => $data['postCreator'],
+            'some_column' => 'some value',
+            'x' => 'asd',
+            'y' => 'askdhjashd',
+        ]);
+ 
+     
+        //redirect to /posts
+        return to_route('posts.index');
+
     }
-    public function destroy()
+    public function destroy($id)
     {
+        dd($id);
         
         return view('posts.destroy');
     }
