@@ -14,7 +14,7 @@
             </ul>
         </div>
       @endif
-      <form method="POST" action="{{route('posts.store')}}">
+      <form method="POST" action="{{route('posts.store')}}" enctype="multipart/form-data">
         @csrf
         <div class="mb-4 " style=" margin: '10px';
                                       
@@ -44,7 +44,7 @@
                                       background-color: '#8D8DAA';
                                       border-color: '#8D8DAA'">
           <label for="exampleFormControlInputfile" class="form-label">Photo</label>
-          <input type="file" class="form-control" id="file" name="file">
+          <input type="file" class="form-control" id="image" name="image">
         </div>
        </div>
 
