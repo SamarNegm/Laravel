@@ -37,7 +37,17 @@
                 <option value="{{$user->id}}">{{$user->name}}</option>
               @endforeach
             </select>
+            <div class="mb-4 " style=" margin: '10px';
+                                      
+                                      width: '50px';
+                                      border-radius: '30px';
+                                      background-color: '#8D8DAA';
+                                      border-color: '#8D8DAA'">
+          <label for="exampleFormControlInputfile" class="form-label">Photo</label>
+          <input type="file" class="form-control" id="file" name="file">
+        </div>
        </div>
+
 
           <div class="mb-3" style="margin:auto">
                 <button type="submit" class="btn" style="background-color:#8D8DAA; border-color:#8D8DAA;color: white;">Create Post</button>
