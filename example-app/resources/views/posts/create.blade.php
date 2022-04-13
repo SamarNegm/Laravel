@@ -5,6 +5,15 @@
 @section('content')
 <div  class="col-7" style="margin-top:40px;margin-left:auto;margin-right:auto;padding: 90px; background-color: #F7F5F2;
  ">
+       @if ($errors->any())
+        <div class="alert alert-danger">
+            <ul>
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+      @endif
       <form method="POST" action="{{route('posts.store')}}">
         @csrf
         <div class="mb-4 " style=" margin: '10px';
@@ -14,7 +23,7 @@
                                         background-color: '#8D8DAA';
                                         border-color: '#8D8DAA'">
             <label for="exampleFormControlInput1" class="form-label">Title</label>
-            <input type="text" class="form-control" id="name" name="name">
+            <input type="text" class="form-control" id="name" name="title">
           </div>
           <div class="mb-3">
             <label for="exampleFormControlTextarea1" class="form-label" >Description</label>

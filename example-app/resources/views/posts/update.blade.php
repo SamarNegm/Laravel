@@ -14,7 +14,7 @@
                                         background-color: '#8D8DAA';
                                         border-color: '#8D8DAA'">
             <label for="exampleFormControlInput1" class="form-label">Title</label>
-            <input type="text" class="form-control" id="name" value={{$post->title}} name="name">
+            <input type="text" class="form-control" id="name" value={{$post->title}} name="title">
           </div>
           <div class="mb-3">
             <label for="exampleFormControlTextarea1" class="form-label" >Description</label>

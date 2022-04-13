@@ -23,8 +23,10 @@ class PostController extends Controller
       
        //we need a model class that retrieves data from posts table
        $posts = Post::all();
+       $users = User::all();
        return view('posts.index',[
            'allPosts' => $posts,
+           'users' =>$users 
        ]);
     }
 
@@ -44,15 +46,15 @@ class PostController extends Controller
         // $title = request()->title;
 
         //store the request data in the db
-        Post::create([
-            'title' => $data['name'],
+        $post = Post::create([
+            'title' => $data['title'],
             'description' => $data['description'],
             'user_id' => $data['postCreator'],
             'some_column' => 'some value',
             'x' => 'asd',
             'y' => 'askdhjashd',
         ]);
-
+        // echo $post->slug;
         //redirect to /posts
         return to_route('posts.index');
 
@@ -85,12 +87,12 @@ class PostController extends Controller
         // dd($id);
         $data = request()->all();
         $post = Post::find($id);
-        $post->title= $data['name'];
+        $post->title= $data['title'];
         $post->description= $data['description'];
         $post->user_id= $data['postCreator'];
         $post->save();
      
- 
+        // echo $post->slug;
      
         //redirect to /posts
         return to_route('posts.index');

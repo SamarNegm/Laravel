@@ -24,8 +24,8 @@ class StorePostRequest extends FormRequest
     public function rules()
     {
         return [
-            'title' => ['required', 'min:3'],
-            'description' => ['required', 'min:5'],
+            'title' => ['required','unique:posts,title', 'min:3'],
+            'description' => ['required', 'min:10'],
         ];
     }
 
@@ -37,7 +37,7 @@ class StorePostRequest extends FormRequest
     public function messages()
     {
         return [
-            'title.required' => 'my message',
+            'title.required' => 'Title is required and must not be unique',
             'title.min' => 'override default min message',
         ];
     }
