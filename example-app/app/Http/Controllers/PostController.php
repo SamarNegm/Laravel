@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 
 use App\Models\Post;
 use App\Models\User;
+use App\Http\Requests\StorePostRequest;
 class PostController extends Controller
 {
     protected $posts;
@@ -37,7 +38,7 @@ class PostController extends Controller
         ]);
     }
 
-    public function store(Request $request)
+    public function store(StorePostRequest $request)
     {
         $data = request()->all();
         // $title = request()->title;
