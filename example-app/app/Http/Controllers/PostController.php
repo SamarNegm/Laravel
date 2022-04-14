@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 use App\Models\Post;
 use App\Models\User;
 use App\Http\Requests\StorePostRequest;
+use Cviebrock\EloquentSluggable\Services\SlugService;
+use Illuminate\Support\Facades\Storage;
 class PostController extends Controller
 {
     protected $posts;
@@ -44,7 +46,8 @@ class PostController extends Controller
     {
         $data = request()->all();
         // $title = request()->title;
-
+        $path = Storage::putFile('public', request()->file('image'));
+        $url = Storage::url($path);
         //store the request data in the db
         $post = Post::create([
             'title' => $data['title'],
@@ -53,6 +56,7 @@ class PostController extends Controller
             'some_column' => 'some value',
             'x' => 'asd',
             'y' => 'askdhjashd',
+            'image_url' => $url,
         ]);
         // echo $post->slug;
         //redirect to /posts
