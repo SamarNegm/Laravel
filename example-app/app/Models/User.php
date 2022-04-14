@@ -32,7 +32,10 @@ class User extends Authenticatable
         'password',
         'remember_token',
     ];
-
+    public function comments()
+    {
+        return $this->morphMany(Comment::class, 'commentable');
+    }
     /**
      * The attributes that should be cast.
      *

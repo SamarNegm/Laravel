@@ -2,7 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PostController; //== require
-
+use App\Http\Controllers\CommentController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -31,3 +31,7 @@ Route::get('/posts/{post}', [PostController::class, 'show'])->name('posts.show')
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::post('/comments/{postId}', [CommentController::class, 'create'])->name('comments.create');
+Route::delete('/comments/{postId}/{commentId}', [CommentController::class, 'delete'])->name('comments.delete');
+Route::get('/comments/{postId}/{commentId}', [CommentController::class, 'view'])->name('comments.view');
+Route::patch('/comments/{postId}/{commentId}', [CommentController::class, 'edit'])->name('comments.update');
