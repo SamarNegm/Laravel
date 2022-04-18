@@ -1,6 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
+<script src="https://apis.google.com/js/platform.js" async defer></script>
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
@@ -56,7 +57,9 @@
                                 <button type="submit" class="btn btn-primary">
                                     {{ __('Login') }}
                                 </button>
-
+                                <a  class="btn btn-dark"  href="/auth/redirect">
+                                    Login with github
+                                    </a>
                                 @if (Route::has('password.request'))
                                     <a class="btn btn-link" href="{{ route('password.request') }}">
                                         {{ __('Forgot Your Password?') }}

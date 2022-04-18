@@ -14,7 +14,7 @@ return new class extends Migration
     public function up()
     {
         Schema::table('posts', function (Blueprint $table) {
-            $table->unsignedBigInteger('image_url')->nullable();
+            $table->text('image_url')->nullable();
         });
     }
 
