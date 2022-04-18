@@ -36,11 +36,13 @@ Route::post('/comments/{postId}', [CommentController::class, 'create'])->name('c
 Route::delete('/comments/{postId}/{commentId}', [CommentController::class, 'delete'])->name('comments.delete');
 Route::get('/comments/{postId}/{commentId}', [CommentController::class, 'view'])->name('comments.view');
 Route::patch('/comments/{postId}/{commentId}', [CommentController::class, 'edit'])->name('comments.update');
-Route::get('/auth/redirect', function () {
+Route::get('/auth/redirect/github', function () {
     return Socialite::driver('github')->redirect();
 });
- 
-Route::get('/auth/callback', function () {
+Route::get('/auth/redirect/google', function () {
+    return Socialite::driver('google')->redirect();
+});
+Route::get('/auth/callback/github', function () {
     $githubUser = Socialite::driver('github')->user();
  
     $user = User::where('github_id', $githubUser->id)->first();
@@ -57,6 +59,34 @@ Route::get('/auth/callback', function () {
             'github_id' => $githubUser->id,
             'github_token' => $githubUser->token,
             'github_refresh_token' => $githubUser->refreshToken,
+        ]);
+    }
+ 
+    Auth::login($user);
+ 
+    return redirect('/dashboard');
+
+ 
+    // $user->token
+});
+
+Route::get('/auth/callback/google', function () {
+    $googleUser = Socialite::driver('google')->user();
+ 
+    $user = User::where('google_id', $googleUser->id)->first();
+ 
+    if ($user) {
+        $user->update([
+            'google_token' => $googleUser->token,
+            'google_refresh_token' => $googleUser->refreshToken,
+        ]);
+    } else {
+        $user = User::create([
+            'name' => $googleUser->name,
+            'email' => $googleUser->email,
+            'google_id' => $googleUser->id,
+            'google_token' => $googleUser->token,
+            'google_refresh_token' => $googleUser->refreshToken,
         ]);
     }
  
